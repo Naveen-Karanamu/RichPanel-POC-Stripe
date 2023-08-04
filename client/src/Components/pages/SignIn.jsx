@@ -34,7 +34,7 @@ const SignIn = ({ isOpen, setIsOpen }) => {
     const dispatchData= await dispatch(signIn(userData));
     
     dispatchData.status==="registered"
-    ?history.push("/main")
+    ?history.push("/plans")
     :alert(dispatchData.payload.response.data.error);
   };
   return (

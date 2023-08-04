@@ -33,7 +33,7 @@ const SignUp = () => {
     });
     const dispatchData = await dispatch(signUp(userData));
     dispatchData.status === "registered"
-      ? history.push("/main")
+      ? history.push("/plans")
       : alert(dispatchData.payload.response.data.error);
   };
   return (

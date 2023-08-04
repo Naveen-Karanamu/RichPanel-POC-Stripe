@@ -2,6 +2,7 @@
 import { Route, Redirect } from "react-router-dom";
 import SignUp from "./Components/pages/SignUp";
 import SignIn from "./Components/pages/SignIn";
+import Plans from "./Components/pages/Plans";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       </Route>
     <Route path="/signup" exact component={SignUp} />
     <Route path="/signin" exact component={SignIn} />
+    <Route path="/plans" exact component={Plans} />
     </>
   );
 }
