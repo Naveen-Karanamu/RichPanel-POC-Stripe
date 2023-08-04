@@ -13,6 +13,46 @@ const MonthlyPlans = () => {
     setIsYear(true);
     setIsMonth(false);
   };
+
+  // secondary components
+  const[isMobile,setIsMobile]=useState(false);
+  const[isBasic,setIsBasic]=useState(false);
+  const[isStandard,setIsStandard]=useState(false);
+  const[isPremium,setisPremium]=useState(false);
+
+  const toggleMobile=()=>{
+    setIsMobile(true);
+    setIsBasic(false);
+    setIsStandard(false)
+    setisPremium(false);
+  }
+  const toggleBasic=()=>{
+    setIsMobile(false);
+    setIsBasic(true);
+    setIsStandard(false)
+    setisPremium(false);
+  }
+  const toggleStandard=()=>{
+    setIsMobile(false);
+    setIsBasic(false);
+    setIsStandard(true)
+    setisPremium(false);
+  }
+  const togglePremium=()=>{
+    setIsMobile(false);
+    setIsBasic(false);
+    setIsStandard(false)
+    setisPremium(true);
+  }
+
+  const nextButton=()=>{
+    if(isMobile) alert("Mobile")
+   else if(isBasic) alert("Basic")
+    else if(isStandard) alert("Standard")
+    else if(isPremium) alert("Premium")
+    else alert("Nothing is selected ")
+  }
+  
   return (
     <>
       <div>
@@ -65,7 +105,7 @@ const MonthlyPlans = () => {
         {/* following rows */}
         <div className="flex gap-10">
           <div className=" hover:text-signBg-100">
-            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100">
+            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100" onClick={toggleMobile}>
               <p>Mobile</p>
             </button>
             <div className="flex flex-col gap-4 justify-center items-center py-4 text-gray-500 font-bold hover:text-signBg-100 focus:bg-signBg-100">
@@ -81,7 +121,7 @@ const MonthlyPlans = () => {
             </div>
           </div>
           <div>
-            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100">
+            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100" onClick={toggleBasic}>
               <p>Basic</p>
             </button>
             <div className="flex flex-col gap-4 justify-center items-center py-3 text-gray-500 font-bold hover:text-signBg-100">
@@ -99,7 +139,7 @@ const MonthlyPlans = () => {
             </div>
           </div>
           <div>
-            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100">
+            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100" onClick={toggleStandard}>
               <p>Standard</p>
             </button>
             <div className="flex flex-col gap-4 justify-center items-center py-3 text-gray-500 font-bold hover:text-signBg-100">
@@ -117,7 +157,7 @@ const MonthlyPlans = () => {
             </div>
           </div>
           <div>
-            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100">
+            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100" onClick={togglePremium}>
               <p>Premium</p>
             </button>
             <div className="flex flex-col gap-4 justify-center items-center py-3 text-gray-500 font-bold hover:text-signBg-100">
@@ -137,7 +177,7 @@ const MonthlyPlans = () => {
         </div>
       </div>
       <div className="flex justify-center py-4">
-        <button className="bg-signBg-100 text-xl font-semibold py-4 px-48 text-white hover:bg-signBg-200 focus:bg-signBg-200 ">
+        <button className="bg-signBg-100 text-xl font-semibold py-4 px-48 text-white hover:bg-signBg-200 focus:bg-signBg-200 " onClick={nextButton}>
           Next
         </button>
       </div>
