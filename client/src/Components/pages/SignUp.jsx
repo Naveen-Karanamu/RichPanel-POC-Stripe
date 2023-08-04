@@ -1,10 +1,9 @@
-import { Fragment, useState } from "react";
+import {  useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
 // Icons
 import { signUp } from "../../Redux/Reducer/Auth/auth.action";
-import SignIn from "./SignIn";
 
 const SignUp = () => {
   const history = useHistory();
