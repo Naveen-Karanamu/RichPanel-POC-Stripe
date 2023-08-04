@@ -2,6 +2,9 @@ import 'dotenv/config'
 
 // Libraries
 import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import passport from "passport";
 import session from "express-session";
 
 // Microservice Routs
@@ -13,18 +16,23 @@ import ConnectDB from "./database/connection.js";
 const app = express();
 
 
-// Middlewares
-app.use(express.json());
-
-// App Routes
-app.use("/auth", Auth);
-
 // Session config
 app.use(session({
     resave: false,
     saveUninitialized: true,
     secret: 'Session started'
   }));
+// Middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(helmet());
+app.use(cors());
+app.use(passport.initialize());
+app.use(passport.session());
+
+// App Routes
+app.use("/auth", Auth);
+
   
 
 app.get("/", (req, res) => res.json({ message: "Setup done" }));

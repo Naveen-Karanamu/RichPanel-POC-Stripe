@@ -11,7 +11,7 @@ export const signIn = (userData) => async (dispatch) => {
             data:{credentials : userData},
         })
 
-        localStorage.setItem("zomatoUser", JSON.stringify({token:User.data.token}));
+        localStorage.setItem("user", JSON.stringify({token:User.data.token}));
 
         return dispatch({ type: SIGN_IN, payload: User.data });
     } catch (error) {
@@ -27,7 +27,7 @@ export const signUp = (userData) => async (dispatch) => {
             data:{credentials : userData},
         })
 
-        localStorage.setItem("zomatoUser", JSON.stringify({token:User.data.token}));
+        localStorage.setItem("user", JSON.stringify({token:User.data.token}));
 
         return dispatch({ type: SIGN_UP, payload: User.data });
     } catch (error) {

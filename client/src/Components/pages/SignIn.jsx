@@ -19,7 +19,6 @@ const SignIn = ({ isOpen, setIsOpen }) => {
   const [userData, setUserData] = useState({
     email: "",
     password: "",
-    fullname: "",
   });
 
   const handleChange = (e) =>
@@ -31,7 +30,6 @@ const SignIn = ({ isOpen, setIsOpen }) => {
     setUserData({
       email: "",
       password: "",
-      fullname: "",
     });
     dispatch(signIn(userData));
   };
