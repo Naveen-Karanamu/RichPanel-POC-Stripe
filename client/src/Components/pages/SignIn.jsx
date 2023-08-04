@@ -26,12 +26,16 @@ const SignIn = ({ isOpen, setIsOpen }) => {
 
   const dispatch = useDispatch();
 
-  const submit = () => {
+  const submit = async () => {
     setUserData({
       email: "",
       password: "",
     });
-    dispatch(signIn(userData));
+    const dispatchData= await dispatch(signIn(userData));
+    
+    dispatchData.status==="registered"
+    ?history.push("/main")
+    :alert(dispatchData.payload.response.data.error);
   };
   return (
     <div className="bg-signBg-100 w-full h-screen flex justify-center items-center">

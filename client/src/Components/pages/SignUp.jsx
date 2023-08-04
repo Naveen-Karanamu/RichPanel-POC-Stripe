@@ -7,13 +7,13 @@ import { signUp } from "../../Redux/Reducer/Auth/auth.action";
 import SignIn from "./SignIn";
 
 const SignUp = () => {
-    const history = useHistory();
+  const history = useHistory();
 
-    const routeChange = () =>{ 
-        let path = `/signin`; 
-        history.push(path);
-      }
-    
+  const routeChange = () => {
+    let path = `/signin`;
+    history.push(path);
+  };
+
   const [userData, setUserData] = useState({
     email: "",
     password: "",
@@ -25,13 +25,16 @@ const SignUp = () => {
 
   const dispatch = useDispatch();
 
-  const submit = () => {
+  const submit = async () => {
     setUserData({
       email: "",
       password: "",
       fullname: "",
     });
-    dispatch(signUp(userData));
+    const dispatchData = await dispatch(signUp(userData));
+    dispatchData.status === "registered"
+      ? history.push("/main")
+      : alert(dispatchData.payload.response.data.error);
   };
   return (
     <div className="bg-signBg-100 w-full h-screen flex justify-center items-center">
