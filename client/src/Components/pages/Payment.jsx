@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import React, {  useState } from "react";
+import { useHistory  } from "react-router-dom";
 import { BsCreditCard } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { postSubs } from "../../Redux/Reducer/Subscription/subs.action";
 
 const Payment = () => {
+  const history = useHistory();
     const subsData = JSON.parse(localStorage.getItem("selectedsubsData"));
 
     const [inputValue, setInputValue] = useState("");
@@ -14,8 +15,13 @@ const Payment = () => {
     
     const handleDispatchsubsData = async () => {
         if (subsData) {
+          try {
             const data= await dispatch(postSubs(subsData));
             console.log(data);
+            history.push("/confirm");
+      } catch (error) {
+        console.error("Error saving data:", error);
+      }
         }
     };
     
