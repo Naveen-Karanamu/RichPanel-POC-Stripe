@@ -1,5 +1,6 @@
 import express from "express";
 import { SubscriptionModel } from "../../database/subscription/index.js";
+import {creditCardNo} from "../../Validations/subscription.js"
 
 
 const Router = express.Router()
@@ -30,6 +31,7 @@ Method: POST
 */
 Router.post("/new", async (req, res) => {
     try{
+        await creditCardNo(req.body.newSubscriber);
         const newSubscriber = req.body.newSubscriber;
 
     // database.authors.push(newAuthor);

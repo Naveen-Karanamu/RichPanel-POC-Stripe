@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 const MonthlyPlans = () => {
+  const history = useHistory();
+
   const [isMonth, setIsMonth] = useState(true);
   const [isYear, setIsYear] = useState(false);
 
@@ -45,13 +48,50 @@ const MonthlyPlans = () => {
     setisPremium(true);
   }
 
-  const nextButton=()=>{
-    if(isMobile) alert("Mobile")
-   else if(isBasic) alert("Basic")
-    else if(isStandard) alert("Standard")
-    else if(isPremium) alert("Premium")
-    else alert("Nothing is selected ")
-  }
+  const initialData = {
+    planName: "",
+    price: "",
+    videoQuality: "",
+    resolution: "",
+    devices: [],
+  };
+
+  const [tempData, setTempData] = useState(initialData);
+
+  const nextButton = () => {
+    let data = { ...initialData }; // Create a copy of the initialData object
+
+    if (isMobile) {
+      data.planName = "Mobile";
+      data.price = isMonth ? "₹ 100" : "₹ 1000";
+      data.videoQuality = "Good";
+      data.resolution = "480p";
+      data.devices = ["Phone", "Tablet"];
+    } else if (isBasic) {
+      data.planName = "Basic";
+      data.price = isMonth ? "₹ 200" : "₹ 2000";
+      data.videoQuality = "Good";
+      data.resolution = "480p";
+      data.devices = ["Phone", "Tablet", "Computer", "TV"];
+    } else if (isStandard) {
+      data.planName = "Standard";
+      data.price = isMonth ? "₹ 500" : "₹ 5000";
+      data.videoQuality = "Better";
+      data.resolution = "1080p";
+      data.devices = ["Phone", "Tablet", "Computer", "TV"];
+    } else if (isPremium) {
+      data.planName = "Premium";
+      data.price = isMonth ? "₹ 700" : "₹ 7000";
+      data.videoQuality = "Best";
+      data.resolution = "4K+HDR";
+      data.devices = ["Phone", "Tablet", "Computer", "TV"];
+    }
+
+    setTempData(data); // Update tempData state with the selected plan's data
+    localStorage.setItem("selectedPlanData", JSON.stringify(data));
+  history.push("/payment");
+    console.log(data);
+  };
   
   return (
     <>

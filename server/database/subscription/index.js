@@ -3,6 +3,8 @@ import mongoose from "mongoose"
 const SubscriptionSchema=new mongoose.Schema({
     no: {
         type:Number,
+        required:true,
+        minLenght:15
     },
     price: {
         type:String,
