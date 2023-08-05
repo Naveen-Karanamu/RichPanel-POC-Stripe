@@ -9,6 +9,7 @@ import session from "express-session";
 
 // Microservice Routs
 import Auth from "./API/Auth/index.js"
+import Subsciber from "./API/Subscription/index.js"
 
 // Database connection
 import ConnectDB from "./database/connection.js";
@@ -34,6 +35,7 @@ app.use(passport.session());
 
 // App Routes
 app.use("/auth", Auth);
+app.use("/subs", Subsciber);
 
   
 
