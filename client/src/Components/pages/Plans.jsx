@@ -104,8 +104,8 @@ const MonthlyPlans = () => {
         </div>
         {/* following rows */}
         <div className="flex gap-10">
-          <div className=" hover:text-signBg-100">
-            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100" onClick={toggleMobile}>
+          <div className=" hover:text-signBg-100"  onClick={toggleMobile}>
+            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100">
               <p>Mobile</p>
             </button>
             <div className="flex flex-col gap-4 justify-center items-center py-4 text-gray-500 font-bold hover:text-signBg-100 focus:bg-signBg-100">
@@ -120,8 +120,8 @@ const MonthlyPlans = () => {
               <p className="text-xs py-3 w-full text-center">Tablet</p>
             </div>
           </div>
-          <div>
-            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100" onClick={toggleBasic}>
+          <div onClick={toggleBasic}>
+            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100" >
               <p>Basic</p>
             </button>
             <div className="flex flex-col gap-4 justify-center items-center py-3 text-gray-500 font-bold hover:text-signBg-100">
@@ -138,8 +138,8 @@ const MonthlyPlans = () => {
               <p className="text-xs py-3 w-full text-center">TV</p>
             </div>
           </div>
-          <div>
-            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100" onClick={toggleStandard}>
+          <div  onClick={toggleStandard}>
+            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100">
               <p>Standard</p>
             </button>
             <div className="flex flex-col gap-4 justify-center items-center py-3 text-gray-500 font-bold hover:text-signBg-100">
@@ -156,8 +156,8 @@ const MonthlyPlans = () => {
               <p className="text-xs py-3 w-full text-center">TV</p>
             </div>
           </div>
-          <div>
-            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100" onClick={togglePremium}>
+          <div  onClick={togglePremium}>
+            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100">
               <p>Premium</p>
             </button>
             <div className="flex flex-col gap-4 justify-center items-center py-3 text-gray-500 font-bold hover:text-signBg-100">
