@@ -1,17 +1,24 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { BsCreditCard } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { postSubs } from "../../Redux/Reducer/Subscription/subs.action";
 
 const Payment = () => {
+    const subsData = JSON.parse(localStorage.getItem("selectedsubsData"));
+
+    const [inputValue, setInputValue] = useState("");
+    subsData.no=inputValue;
+    
     const dispatch = useDispatch();
-
-    // const data=useEffect({
-
-    // },[])
-
-  const planData = JSON.parse(localStorage.getItem("selectedPlanData"));
+    
+    const handleDispatchsubsData = async () => {
+        if (subsData) {
+            const data= await dispatch(postSubs(subsData));
+            console.log(data);
+        }
+    };
+    
   return (
     <div className="bg-signBg-100 w-full h-screen flex justify-center items-center px-64">
       <div className="bg-white h-80 w-3/5 rounded-l-xl flex flex-col gap-2 p-8">
@@ -21,6 +28,10 @@ const Payment = () => {
           <div className="flex justify-start items-center rounded-sm border-y-2 border-l-2 py-2 px-4 gap-2 my-2 w-2/3">
             <BsCreditCard className="text-gray-500" />
             <input
+            type="number"
+            name="no"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
               placeholder="Card Number"
               className="w-full focus:outline-none border-r-2"
             />
@@ -30,7 +41,7 @@ const Payment = () => {
             <input placeholder="CVC" className="focus:outline-none w-1/2" />
           </div>
         </div>
-        <button className="bg-signBg-100 f w-1/2 text-white hover:bg-signBg-200 my-4 py-2 rounded-md text-center">
+        <button className="bg-signBg-100 f w-1/2 text-white hover:bg-signBg-200 my-4 py-2 rounded-md text-center" onClick={handleDispatchsubsData}>
           Confirm Payment
         </button>
       </div>
@@ -38,31 +49,19 @@ const Payment = () => {
         <p className="text-xl font-semibold pb-6">Order Summary</p>
         <div className="flex justify-between items-center border-b-2 border-gray-400 py-3">
             <p className="text-md font-medium ">Plan Name</p>
-            <p className="text-md font-bold">{planData.planName}</p>
+            <p className="text-md font-bold">{subsData.planName}</p>
         </div>
         <div className="flex justify-between items-center border-b-2 border-gray-400 py-3">
             <p className="text-md font-medium ">Billing Cycle</p>
-            <p className="text-md font-bold">{planData.planType}</p>
+            <p className="text-md font-bold">{subsData.planType}</p>
         </div>
         <div className="flex justify-between items-center border-b-2 border-gray-400 py-3">
             <p className="text-md font-medium ">Plan Price</p>
-            <p className="text-md font-bold">{planData.price}/mo</p>
+            <p className="text-md font-bold">{subsData.price}/mo</p>
         </div>
       </div>
     </div>
   );
 };
-{
-  /* <p>Confirm Payment Details:</p>
-      {planData && (
-        <>
-          <p>Plan Name: {planData.planName}</p>
-          <p>Price: {planData.price}</p>
-          <p>Video Quality: {planData.videoQuality}</p>
-          <p>Resolution: {planData.resolution}</p>
-          <p>Devices: {planData.devices.join(", ")}</p>
-        </>
-      )} */
-}
 
 export default Payment;

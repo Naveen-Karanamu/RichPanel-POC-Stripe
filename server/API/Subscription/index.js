@@ -31,13 +31,13 @@ Method: POST
 */
 Router.post("/new", async (req, res) => {
     try{
-        await creditCardNo(req.body.newSubscriber);
-        const newSubscriber = req.body.newSubscriber;
+        await creditCardNo(req.body.subsData);
+        const subsData = req.body.subsData;
 
     // database.authors.push(newAuthor);
-    const addNewSubscriber = await SubscriptionModel.create(newSubscriber);
+    const addsubsData = await SubscriptionModel.create(subsData);
 
-    return (res.json({ subscribers: addNewSubscriber, message: "Subscriber added" }));
+    return (res.json({ subscribers: addsubsData, message: "Subscriber added" }));
     }catch(error){
         return(res.json({error:error.message}))
     }

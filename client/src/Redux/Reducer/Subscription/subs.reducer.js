@@ -12,7 +12,6 @@ const subsReducer = (state = INITIAL_STATE, action) => {
         case POST_SUBSCRIPTION:
             return {
                 ...state,
-                // reviews:state.reviews.push(action.payload)
                 subsctipitons:[...state.subsctipitons, action.payload]
             }
 

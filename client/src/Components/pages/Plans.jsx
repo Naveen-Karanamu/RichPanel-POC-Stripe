@@ -49,6 +49,7 @@ const MonthlyPlans = () => {
   }
 
   const initialData = {
+    no:"",
     planName: "",
     price: "",
     videoQuality: "",
@@ -90,7 +91,7 @@ const MonthlyPlans = () => {
     data.planType = isMonth ? "Monthly" : "Yearly";
 
     setTempData(data); // Update tempData state with the selected plan's data
-    localStorage.setItem("selectedPlanData", JSON.stringify(data));
+    localStorage.setItem("selectedsubsData", JSON.stringify(data));
   history.push("/payment");
     console.log(data);
   };

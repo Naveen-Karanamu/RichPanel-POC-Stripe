@@ -19,7 +19,8 @@ export const postSubs = (subsData) => async (dispatch) => {
     try {
         const subs = await axios({
             method: "POST",
-            url: `http://localhost:3001/subs/new`
+            url: `http://localhost:3001/subs/new`,
+            data:subsData
         })
 
         return dispatch({ type: POST_SUBSCRIPTION, payload: { ...subsData } });
