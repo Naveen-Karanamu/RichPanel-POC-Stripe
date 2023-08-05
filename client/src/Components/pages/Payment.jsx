@@ -3,34 +3,73 @@ import { useHistory  } from "react-router-dom";
 import { BsCreditCard } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { postSubs } from "../../Redux/Reducer/Subscription/subs.action";
+import {loadStripe} from "@stripe/stripe-js"
+import {CardElement, useElements, useStripe} from "@stripe/react-stripe-js"
+import {Elements} from '@stripe/react-stripe-js';
 
-const Payment = () => {
+const stripePromise = loadStripe(`${process.env.STRIPE_PUBLISHABLE_API_KEY}`);
+
+const Wrapper = (props) => (
+  <Elements stripe={stripePromise}>
+    <Payment {...props} />
+  </Elements>
+);
+
+
+const Payment = (props) => {
+  // Stripe
+
+  const stripe=useStripe()
+  const elements=useElements()
+
+
   const history = useHistory();
     const subsData = JSON.parse(localStorage.getItem("selectedsubsData"));
 
     const [inputValue, setInputValue] = useState("");
-    subsData.no=inputValue;
+    
     
     const dispatch = useDispatch();
     
     const handleDispatchsubsData = async () => {
-        if (subsData) {
-          try {
-            const data= await dispatch(postSubs(subsData));
-            console.log(data);
+      if (subsData) {
+        try {
+          
+          // Stripe
+          const paymentMethod= await stripe.createPaymentMethod({
+            type:"card",
+            card:elements.getElement("card"),
+            })
+            const response=await fetch("http://localhost:3001/stripe/new", {
+              method:"POST",
+              headers:{
+                "Content-Type":"application/json",
+              },
+              body:JSON.stringify({
+                paymentMethod:paymentMethod.paymentMethod.id,
+              })
+            })
+            if(!response.ok) return alert('payment Unsuccessfull')
+            const paymentData=await response.json();
+            const confirm =await stripe.confirmCardPayment(paymentData.clientSecret)
+            if(confirm.error) return alert("Payment Unsuccessfull")
+            alert('Payment Successfull, suscription is active')
             history.push("/confirm");
       } catch (error) {
         console.error("Error saving data:", error);
       }
         }
     };
+
+    
+    
     
   return (
     <div className="bg-signBg-100 w-full h-screen flex justify-center items-center px-64">
       <div className="bg-white h-80 w-3/5 rounded-l-xl flex flex-col gap-2 p-8">
         <p className="text-2xl font-semibold ">Complete Payment</p>
         <p>Enter your Credit of Debit card details below</p>
-        <div className=" flex items-center justify-center">
+        {/* <div className=" flex items-center justify-center">
           <div className="flex justify-start items-center rounded-sm border-y-2 border-l-2 py-2 px-4 gap-2 my-2 w-2/3">
             <BsCreditCard className="text-gray-500" />
             <input
@@ -46,7 +85,8 @@ const Payment = () => {
             <input placeholder="MM/YY" className="focus:outline-none w-1/2 border-r-2" />
             <input placeholder="CVC" className="focus:outline-none w-1/2" />
           </div>
-        </div>
+        </div> */}
+        <CardElement className="py-4"/>
         <button className="bg-signBg-100 f w-1/2 text-white hover:bg-signBg-200 my-4 py-2 rounded-md text-center" onClick={handleDispatchsubsData}>
           Confirm Payment
         </button>
@@ -70,4 +110,4 @@ const Payment = () => {
   );
 };
 
-export default Payment;
+export default Wrapper;

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { postSubs } from "../../Redux/Reducer/Subscription/subs.action";
 
 const MonthlyPlans = () => {
   const history = useHistory();
@@ -58,6 +60,7 @@ const MonthlyPlans = () => {
     planType: "",
   };
 
+  const dispatch = useDispatch();
   const [tempData, setTempData] = useState(initialData);
 
   const nextButton = () => {
@@ -91,9 +94,10 @@ const MonthlyPlans = () => {
     data.planType = isMonth ? "Monthly" : "Yearly";
 
     setTempData(data); // Update tempData state with the selected plan's data
+    dispatch(postSubs(data));
     localStorage.setItem("selectedsubsData", JSON.stringify(data));
   history.push("/payment");
-    console.log(data);
+    // console.log(data);
   };
   
   return (

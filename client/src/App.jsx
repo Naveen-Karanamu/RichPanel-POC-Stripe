@@ -9,14 +9,14 @@ import Confirmation from "./Components/pages/Confirmation";
 function App() {
   return (
     <>
-    <Route path="/" exact>
+      <Route path="/" exact>
         <Redirect to="/signup" />
       </Route>
-    <Route path="/signup" exact component={SignUp} />
-    <Route path="/signin" exact component={SignIn} />
-    <Route path="/plans" exact component={Plans} />
-    <Route path="/payment" exact component={Payment} />
-    <Route path="/confirm" exact component={Confirmation} />
+      <Route path="/signup" exact component={SignUp} />
+      <Route path="/signin" exact component={SignIn} />
+      <Route path="/plans" exact component={Plans} />
+      <Route path="/payment" exact component={Payment} />
+      <Route path="/confirm" exact component={Confirmation} />
     </>
   );
 }
