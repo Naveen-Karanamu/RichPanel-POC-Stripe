@@ -54,6 +54,7 @@ const MonthlyPlans = () => {
     videoQuality: "",
     resolution: "",
     devices: [],
+    planType: "",
   };
 
   const [tempData, setTempData] = useState(initialData);
@@ -86,6 +87,7 @@ const MonthlyPlans = () => {
       data.resolution = "4K+HDR";
       data.devices = ["Phone", "Tablet", "Computer", "TV"];
     }
+    data.planType = isMonth ? "Monthly" : "Yearly";
 
     setTempData(data); // Update tempData state with the selected plan's data
     localStorage.setItem("selectedPlanData", JSON.stringify(data));

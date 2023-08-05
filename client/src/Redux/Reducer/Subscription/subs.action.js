@@ -3,7 +3,7 @@ import axios from "axios"
 // Redus types
 import { GET_SUBSCRIPTION, POST_SUBSCRIPTION } from "./subs.type"
 
-export const getReviews = (no) => async (dispatch) => {
+export const getSubs = (no) => async (dispatch) => {
     try {
         const subscription = await axios({
             method: "GET",
@@ -15,7 +15,7 @@ export const getReviews = (no) => async (dispatch) => {
         return dispatch({ type: "ERROR", payload: error });
     }
 }
-export const postReviews = (subsData) => async (dispatch) => {
+export const postSubs = (subsData) => async (dispatch) => {
     try {
         const subs = await axios({
             method: "POST",
