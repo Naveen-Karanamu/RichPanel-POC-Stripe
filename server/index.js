@@ -23,10 +23,6 @@ app.use(session({
     secret: 'Session started'
   }));
 
-  app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  });
 
 // Middlewares
 app.use(express.json());
