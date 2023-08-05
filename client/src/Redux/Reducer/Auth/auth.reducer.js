@@ -1,4 +1,3 @@
-import SignIn from "../../../Components/pages/SignIn";
 import { SIGN_IN,SIGN_UP } from "./auth.type";
 
 const INITIAL_STATE = {};

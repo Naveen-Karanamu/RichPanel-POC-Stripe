@@ -1,7 +1,7 @@
 import axios from "axios";
 
 // Redus types
-import { SIGN_IN, SIGN_UP, GOOGLE_AUTH } from "./auth.type";
+import { SIGN_IN, SIGN_UP } from "./auth.type";
 
 export const signIn = (userData) => async (dispatch) => {
   try {
