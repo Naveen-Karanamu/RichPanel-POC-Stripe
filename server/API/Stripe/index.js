@@ -79,9 +79,10 @@ Router.post("/new", async (req, res) => {
     return res.json({
       message: "Subscription done",
       clientSecret: subscription.latest_invoice.payment_intent.client_secret,
+      stripe: addStripeData,
     });
   } catch (error) {
-    res.status(500).json({ message: "Internal Server Error" });
+    res.status(500).json({ message: "Internal Server Error", Error: error });
   }
 });
 
@@ -97,14 +98,15 @@ Router.delete("/del/:id", async (req, res) => {
   try {
     const { id } = req.params;
 
-    // Retrieve the subscription from the Stripe application
+    // // Retrieve the subscription from the Stripe application
     const subscription = await stripe.subscriptions.retrieve(id);
 
-    // Delete the subscription from Stripe
+    // // Delete the subscription from Stripe
     await stripe.subscriptions.del(id);
 
     // Delete the data from MongoDB
     await StripeModel.findOneAndDelete({ customer: subscription.customer });
+    // await StripeModel.findOneAndDelete({ customer: id });
 
     res.json({ message: "Subscription deleted successfully." });
   } catch (error) {
