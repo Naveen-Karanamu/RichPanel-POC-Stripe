@@ -17,6 +17,7 @@ import Stripe from "./API/Stripe/index.js"
 import ConnectDB from "./database/connection.js";
 
 const app = express();
+const PORT=process.env.PORT || 3001
 
 // Session config
 // app.use(session({
@@ -49,4 +50,4 @@ app.get("/", (req, res) => {
   res.json({ message: "Setup done" })
 });
 
-app.listen(3001, () => ConnectDB().then(() => console.log("Server is running")).catch((error)=>console.log(error, "Server is running, But database connection failed!")))
+app.listen(PORT, () => ConnectDB().then(() => console.log("Server is running")).catch((error)=>console.log(error, "Server is running, But database connection failed!")))

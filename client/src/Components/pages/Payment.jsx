@@ -77,7 +77,7 @@ const Payment = (props) => {
             <input placeholder="CVC" className="focus:outline-none w-1/2" />
           </div>
         </div> */}
-        <CardElement className="py-4" />
+        <CardElement className="py-4 border-2 rounded px-6" />
         <button
           className="bg-signBg-100 f w-1/2 text-white hover:bg-signBg-200 my-4 py-2 rounded-md text-center"
           onClick={handleDispatchsubsData}
