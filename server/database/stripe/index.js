@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const StripeSchema = new mongoose.Schema({
-  customer: Number,
+  customer: String,
   items: [Object],
   payment_settings: Object,
   expand: [String],

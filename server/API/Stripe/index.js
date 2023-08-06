@@ -19,7 +19,7 @@ Router.post("/new", async (req, res) => {
   try {
     const { paymentMethod } = req.body;
 
-    // Customer
+    // Create a customer and associate the payment method
     const customer = await stripe.customers.create({
       payment_method: paymentMethod,
       invoice_settings: { default_payment_method: paymentMethod },
@@ -30,44 +30,29 @@ Router.post("/new", async (req, res) => {
       name: "Monthly Subscription",
     });
 
+    // Create a price for the product
+    const price = await stripe.prices.create({
+      currency: "INR",
+      product: product.id,
+      unit_amount: 20000000,
+      recurring: {
+        interval: "month",
+      },
+    });
+
     // Create a Subscription
     const subscription = await stripe.subscriptions.create({
       customer: customer.id,
-      items: [
-        {
-          price_data: {
-            currency: "INR",
-            product: product.id,
-            unit_amount: "500",
-            recurring: {
-              interval: "month",
-            },
-          },
-        },
-      ],
-      payment_settings: {
-        payment_method_types: ["card"],
-        save_default_payment_method: "on_subscription",
-      },
+      items: [{ price: price.id }],
+      payment_behavior: "default_incomplete",
       expand: ["latest_invoice.payment_intent"],
     });
 
-    // For MongoDb
+    // For MongoDB
 
     const stripeData = {
       customer: customer.id,
-      items: [
-        {
-          price_data: {
-            currency: "INR",
-            product: product.id,
-            unit_amount: "500",
-            recurring: {
-              interval: "month",
-            },
-          },
-        },
-      ],
+      items: [{ price: price.id }],
       payment_settings: {
         payment_method_types: ["card"],
         save_default_payment_method: "on_subscription",
@@ -97,16 +82,18 @@ Method: DELETE
 Router.delete("/del/:id", async (req, res) => {
   try {
     const { id } = req.params;
+    const idAsString = id.toString();
 
-    // // Retrieve the subscription from the Stripe application
-    const subscription = await stripe.subscriptions.retrieve(id);
-
-    // // Delete the subscription from Stripe
-    await stripe.subscriptions.del(id);
+    // Delete the subscription from Stripe
+    // await stripe.subscriptions.del(idAsString);
 
     // Delete the data from MongoDB
-    await StripeModel.findOneAndDelete({ customer: subscription.customer });
-    // await StripeModel.findOneAndDelete({ customer: id });
+    const deletedSubscription = await StripeModel.findOneAndDelete({ customer: idAsString });
+
+    if (!deletedSubscription) {
+      // If no subscription was found in the database with the given customer ID
+      return res.status(404).json({ message: "Subscription not found in the database." });
+    }
 
     res.json({ message: "Subscription deleted successfully." });
   } catch (error) {

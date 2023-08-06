@@ -7,7 +7,7 @@ export const signIn = (userData) => async (dispatch) => {
   try {
     const User = await axios({
       method: "POST",
-      url: `https://naveen-poc-stripe-be.vercel.app/auth/signin`,
+      url: `http://localhost:3001/auth/signin`,
       data: { credentials: userData },
     });
 
@@ -27,7 +27,7 @@ export const signUp = (userData) => async (dispatch) => {
   try {
     const User = await axios({
       method: "POST",
-      url: `https://naveen-poc-stripe-be.vercel.app/auth/signup`,
+      url: `http://localhost:3001/auth/signup`,
       data: { credentials: userData },
     });
 
