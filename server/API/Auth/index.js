@@ -24,21 +24,20 @@ Access: Public
 Method: POST
 */
 Router.post("/signup", async (req, res) => {
-    try {
-        await validateSignUp(req.body.credentials);
+  try {
+    await validateSignUp(req.body.credentials);
 
-        await UserModel.findByEmail(req.body.credentials);
+    await UserModel.findByEmail(req.body.credentials);
 
-        const newUser = await UserModel.create(req.body.credentials);
+    const newUser = await UserModel.create(req.body.credentials);
 
-        const token = newUser.generateJWT();
+    const token = newUser.generateJWT();
 
-        return (res.status(200).json({ token, status: "Success" }));
-
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
-})
+    return res.status(200).json({ token, status: "Success" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
 
 /*
 Route: /signin
@@ -48,18 +47,18 @@ Access: Public
 Method: POST
 */
 Router.post("/signin", async (req, res) => {
-    try {
-        await validateSignIn(req.body.credentials);
+  try {
+    console.time();
+    await validateSignIn(req.body.credentials);
 
-        const user = await UserModel.findByEmailAndPassword(req.body.credentials);
+    const user = await UserModel.findByEmailAndPassword(req.body.credentials);
 
-        const token = user.generateJWT();
+    const token = user.generateJWT();
 
-        return (res.status(200).json({ token, status: "Success" }));
-
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
-    }
+    return res.status(200).json({ token, status: "Success" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
 });
 
 export default Router;
