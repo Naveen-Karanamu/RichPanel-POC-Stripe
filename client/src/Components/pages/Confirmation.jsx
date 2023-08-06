@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getSubs } from "../../Redux/Reducer/Subscription/subs.action";
+import { delStripe } from "../../Redux/Stripe/stripe.aciton";
 
 const Confirmation = () => {
   // from Redux
@@ -14,8 +15,11 @@ const Confirmation = () => {
   console.log(subscriptions);
 
   const [isCancelled, setIsCancelled] = useState(false);
-  const clickCancel = () => {
+  const clickCancel = async() => {
     setIsCancelled(true);
+    const delData= await dispatch(delStripe(1));
+    if(delData.payload.response.data.message!=="deleted")
+    alert(delData.payload.response.data.message)
   };
   const history = useHistory();
   // from localStorage
