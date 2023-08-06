@@ -1,15 +1,11 @@
 import mongoose from "mongoose"
 
 const SubscriptionSchema=new mongoose.Schema({
-    no: {
-        type:Number,
-        required:true,
-        minLenght:15
-    },
+    planName:{type:String},
     price: {
         type:String,
     },
-    v_quality: {
+    videoQuality: {
         type:String,
     },
     resolution: {
@@ -21,6 +17,12 @@ const SubscriptionSchema=new mongoose.Schema({
     screns: {
         type:Number,
     },
+    planType:{
+        type:String
+    },
+    planName:{
+        type:String
+    }
 })
 
 // Model

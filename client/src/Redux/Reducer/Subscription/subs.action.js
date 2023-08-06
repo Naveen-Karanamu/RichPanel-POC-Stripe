@@ -17,13 +17,14 @@ export const getSubs = (no) => async (dispatch) => {
 }
 export const postSubs = (subsData) => async (dispatch) => {
     try {
+        console.log(subsData);
         const subs = await axios({
             method: "POST",
             url: `http://localhost:3001/subs/new`,
-            data:subsData
+            data:{subsData:subsData}
         })
 
-        return dispatch({ type: POST_SUBSCRIPTION, payload: { ...subsData } });
+        return dispatch({ type: POST_SUBSCRIPTION, payload: {...subs.data }});
     } catch (error) {
         return dispatch({ type: "ERROR", payload: error });
     }

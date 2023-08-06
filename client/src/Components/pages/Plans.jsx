@@ -51,7 +51,6 @@ const MonthlyPlans = () => {
   }
 
   const initialData = {
-    no:"",
     planName: "",
     price: "",
     videoQuality: "",

@@ -2,10 +2,11 @@ import joi from "joi";
 
 export const creditCardNo=(userData)=>{
     const Schema= joi.object({
-        no:joi.number().required().max(16),
         price:joi.string(),
-        v_quality:joi.string(),
+        videoQuality:joi.string(),
         resolution:joi.string(),
+        planType:joi.string(),
+        planName:joi.string(),
         devices:joi.array(),
         screens:joi.number(),
 
