@@ -19,20 +19,20 @@ import ConnectDB from "./database/connection.js";
 const app = express();
 
 // Session config
-app.use(session({
-    resave: false,
-    saveUninitialized: true,
-    secret: 'Session started'
-  }));
+// app.use(session({
+//     resave: false,
+//     saveUninitialized: true,
+//     secret: 'Session started'
+//   }));
 
 
 // Middlewares
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(helmet());
+// app.use(express.urlencoded({ extended: false }));
+// app.use(helmet());
 app.use(cors());
-app.use(passport.initialize());
-app.use(passport.session());
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // App Routes
 app.use("/auth", Auth);
