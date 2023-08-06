@@ -25,11 +25,7 @@ const Payment = (props) => {
 
   const history = useHistory();
     const subsData = JSON.parse(localStorage.getItem("selectedsubsData"));
-
-    const [inputValue, setInputValue] = useState("");
     
-    
-    const dispatch = useDispatch();
     
     const handleDispatchsubsData = async () => {
       if (subsData) {
@@ -103,7 +99,9 @@ const Payment = (props) => {
         </div>
         <div className="flex justify-between items-center border-b-2 border-gray-400 py-3">
             <p className="text-md font-medium ">Plan Price</p>
-            <p className="text-md font-bold">{subsData.price}/mo</p>
+            <p className="text-md font-bold">{subsData.price}/{subsData.planType == 'Monthly'
+            ?"mo"
+          :"year"}</p>
         </div>
       </div>
     </div>
