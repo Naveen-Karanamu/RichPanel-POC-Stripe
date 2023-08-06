@@ -1,11 +1,17 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { getSubs } from "../../Redux/Reducer/Subscription/subs.action";
 
 const Confirmation = () => {
   // from Redux
-  const subsDetails = useSelector((state) => state.subsReducer.subsDetails);
-  console.log(subsDetails);
+  const subscriptions = useSelector((state) => state.subsctipitons);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getSubs(123));
+  }, [dispatch]);
+  console.log(subscriptions);
 
   const [isCancelled, setIsCancelled] = useState(false);
   const clickCancel = () => {

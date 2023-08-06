@@ -5,7 +5,8 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import passport from "passport";
-import session from "express-session";
+// import session from "express-session";
+import session from "cookie-session"
 
 // Microservice Routs
 import Auth from "./API/Auth/index.js"
@@ -16,7 +17,6 @@ import Stripe from "./API/Stripe/index.js"
 import ConnectDB from "./database/connection.js";
 
 const app = express();
-
 
 // Session config
 app.use(session({
