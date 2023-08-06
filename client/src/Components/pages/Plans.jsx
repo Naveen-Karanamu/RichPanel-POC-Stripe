@@ -20,35 +20,35 @@ const MonthlyPlans = () => {
   };
 
   // secondary components
-  const[isMobile,setIsMobile]=useState(false);
-  const[isBasic,setIsBasic]=useState(false);
-  const[isStandard,setIsStandard]=useState(false);
-  const[isPremium,setisPremium]=useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isBasic, setIsBasic] = useState(false);
+  const [isStandard, setIsStandard] = useState(false);
+  const [isPremium, setisPremium] = useState(false);
 
-  const toggleMobile=()=>{
+  const toggleMobile = () => {
     setIsMobile(true);
     setIsBasic(false);
-    setIsStandard(false)
+    setIsStandard(false);
     setisPremium(false);
-  }
-  const toggleBasic=()=>{
+  };
+  const toggleBasic = () => {
     setIsMobile(false);
     setIsBasic(true);
-    setIsStandard(false)
+    setIsStandard(false);
     setisPremium(false);
-  }
-  const toggleStandard=()=>{
+  };
+  const toggleStandard = () => {
     setIsMobile(false);
     setIsBasic(false);
-    setIsStandard(true)
+    setIsStandard(true);
     setisPremium(false);
-  }
-  const togglePremium=()=>{
+  };
+  const togglePremium = () => {
     setIsMobile(false);
     setIsBasic(false);
-    setIsStandard(false)
+    setIsStandard(false);
     setisPremium(true);
-  }
+  };
 
   const initialData = {
     planName: "",
@@ -62,7 +62,7 @@ const MonthlyPlans = () => {
   const dispatch = useDispatch();
   const [tempData, setTempData] = useState(initialData);
 
-  const nextButton = () => {
+  const nextButton = async () => {
     let data = { ...initialData }; // Create a copy of the initialData object
 
     if (isMobile) {
@@ -93,12 +93,14 @@ const MonthlyPlans = () => {
     data.planType = isMonth ? "Monthly" : "Yearly";
 
     setTempData(data); // Update tempData state with the selected plan's data
-    dispatch(postSubs(data));
+    const subDetails = await dispatch(postSubs(data));
     localStorage.setItem("selectedsubsData", JSON.stringify(data));
-  history.push("/payment");
+    if (isMobile || isBasic || isStandard || isPremium)
+      history.push("/payment");
+    else alert("Please select any of the subscription below")
     // console.log(data);
   };
-  
+
   return (
     <>
       <div>
@@ -150,7 +152,7 @@ const MonthlyPlans = () => {
         </div>
         {/* following rows */}
         <div className="flex gap-10">
-          <div className=" hover:text-signBg-100"  onClick={toggleMobile}>
+          <div className=" hover:text-signBg-100" onClick={toggleMobile}>
             <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100">
               <p>Mobile</p>
             </button>
@@ -167,7 +169,7 @@ const MonthlyPlans = () => {
             </div>
           </div>
           <div onClick={toggleBasic}>
-            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100" >
+            <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100">
               <p>Basic</p>
             </button>
             <div className="flex flex-col gap-4 justify-center items-center py-3 text-gray-500 font-bold hover:text-signBg-100">
@@ -184,7 +186,7 @@ const MonthlyPlans = () => {
               <p className="text-xs py-3 w-full text-center">TV</p>
             </div>
           </div>
-          <div  onClick={toggleStandard}>
+          <div onClick={toggleStandard}>
             <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100">
               <p>Standard</p>
             </button>
@@ -202,7 +204,7 @@ const MonthlyPlans = () => {
               <p className="text-xs py-3 w-full text-center">TV</p>
             </div>
           </div>
-          <div  onClick={togglePremium}>
+          <div onClick={togglePremium}>
             <button className="bg-signBg-200 text-white font-semibold text-base w-24 h-24 items-center flex justify-center hover:bg-signBg-100 focus:bg-signBg-100">
               <p>Premium</p>
             </button>
@@ -223,7 +225,10 @@ const MonthlyPlans = () => {
         </div>
       </div>
       <div className="flex justify-center py-4">
-        <button className="bg-signBg-100 text-xl font-semibold py-4 px-48 text-white hover:bg-signBg-200 focus:bg-signBg-200 " onClick={nextButton}>
+        <button
+          className="bg-signBg-100 text-xl font-semibold py-4 px-48 text-white hover:bg-signBg-200 focus:bg-signBg-200 "
+          onClick={nextButton}
+        >
           Next
         </button>
       </div>
