@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "yarn dev",
+    "start": "babel-node index",
     "dev": "nodemon --exec ./node_modules/.bin/babel-node index"
   },
   "type": "module",
