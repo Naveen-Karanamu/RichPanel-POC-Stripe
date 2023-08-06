@@ -40,7 +40,7 @@ const Payment = (props) => {
             type:"card",
             card:elements.getElement("card"),
             })
-            const response=await fetch("http://localhost:3001/stripe/new", {
+            const response=await fetch("/stripe/new", {
               method:"POST",
               headers:{
                 "Content-Type":"application/json",

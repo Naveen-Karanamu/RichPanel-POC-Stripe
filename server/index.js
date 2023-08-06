@@ -10,7 +10,7 @@ import session from "express-session";
 // Microservice Routs
 import Auth from "./API/Auth/index.js"
 import Subsciber from "./API/Subscription/index.js"
-import Stripe from "./API/Stripe/stripe.js"
+import Stripe from "./API/Stripe/index.js"
 
 // Database connection
 import ConnectDB from "./database/connection.js";
