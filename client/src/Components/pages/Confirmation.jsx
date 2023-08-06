@@ -20,7 +20,7 @@ const Confirmation = () => {
   };
   // console.log(subsData);
 
-  // Current date 
+  // Current date
   const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth() + 1;
@@ -28,8 +28,8 @@ const Confirmation = () => {
 
   // Next month
   function formatDate(date) {
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, "0");
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const year = date.getFullYear().toString().slice(-2);
     return `${day}/${month}/${year}`;
   }
@@ -39,24 +39,24 @@ const Confirmation = () => {
     const currentDay = currentDate.getDate();
     const currentMonth = currentDate.getMonth();
     const currentYear = currentDate.getFullYear();
-  
+
     // Calculate the next month and year
     let nextMonth = currentMonth + 1;
     let nextYear = currentYear;
-  
+
     if (nextMonth > 11) {
       // If the next month is greater than 11 (December), set it to January of the next year
-      nextMonth = 0; 
+      nextMonth = 0;
       nextYear++;
     }
-  
+
     // Create a new Date object for the next month's date
-     const nextMonthDate = new Date(nextYear, nextMonth, currentDay);     
-     return nextMonthDate;
-    }
-    const nextMonthDateWithDay = getNextMonthDateWithDay(currentDate);
-    const formattedDate = formatDate(nextMonthDateWithDay);
-  console.log(formattedDate);
+    const nextMonthDate = new Date(nextYear, nextMonth, currentDay);
+    return nextMonthDate;
+  }
+  const nextMonthDateWithDay = getNextMonthDateWithDay(currentDate);
+  const formattedDate = formatDate(nextMonthDateWithDay);
+  // console.log(formattedDate);
 
   return (
     <>
@@ -104,21 +104,17 @@ const Confirmation = () => {
             >
               {isCancelled ? "Choose Plan" : "Change Plan"}
             </button>
-            {
-              subsData.planType=='Monthly'
-              ?<p className="text-xs w-full flex flex-wrap text-gray-500">
-              Your Subscription has started on {" "}
-              {day}/{month}/{year} {" "}
-               and wil auto renew on
-               {" "}{formattedDate}{" "}
-            </p>
-            :<p className="text-xs w-full flex flex-wrap text-gray-500">
-            Your Subscription has started on {" "}
-            {day}/{month}/{year} {" "}
-             and wil auto renew on
-             {" "}{day}/{month}/{year+1} {" "}
-          </p>
-            }
+            {subsData.planType == "Monthly" ? (
+              <p className="text-xs w-full flex flex-wrap text-gray-500">
+                Your Subscription has started on {day}/{month}/{year} and wil
+                auto renew on {formattedDate}{" "}
+              </p>
+            ) : (
+              <p className="text-xs w-full flex flex-wrap text-gray-500">
+                Your Subscription has started on {day}/{month}/{year} and wil
+                auto renew on {day}/{month}/{year + 1}{" "}
+              </p>
+            )}
           </div>
         </div>
       </div>
