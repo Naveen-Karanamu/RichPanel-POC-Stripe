@@ -85,7 +85,7 @@ Router.delete("/del/:id", async (req, res) => {
     const idAsString = id.toString();
 
     // Delete the subscription from Stripe
-    // await stripe.subscriptions.del(idAsString);
+    await stripe.subscriptions.del(idAsString);
 
     // Delete the data from MongoDB
     const deletedSubscription = await StripeModel.findOneAndDelete({ customer: idAsString });
