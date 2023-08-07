@@ -74,16 +74,24 @@ $ git clone https://github.com/Naveen-Karanamu/RichPanel-POC-Stripe.git
 $ cd client
 ```
 
-- Intall the packages
-
+#### Intall the packages
+- yarn 
 ```
 $ yarn install
 ```
+- npm 
+```
+$ npm install
+```
 
-- Run the Frontend
-
+#### Run the Frontend
+- yarn 
 ```
 $ yarn start
+```
+- npm 
+```
+$ npm start
 ```
 
 ### Run the Backend
@@ -94,16 +102,24 @@ $ yarn start
 $ cd server
 ```
 
-- Intall the packages
-
+#### Intall the packages
+- yarn 
 ```
 $ yarn install
 ```
+- npm 
+```
+$ npm install
+```
 
-- Run the Backend
-
+#### Run the Backend
+- yarn 
 ```
 $ yarn dev
+```
+- npm 
+```
+$ npm dev
 ```
 
 #### Set the ENV VARIABLES (Root Dir)
